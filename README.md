@@ -48,3 +48,46 @@ done
 
 echo "All permissions added successfully."
 ```
+
+---
+
+```
+import React, { useState, useEffect } from 'react';
+
+const MaliciousComponent = () => {
+  const [hidden, setHidden] = useState(true);
+
+  useEffect(() => {
+    // Simulate trojan-like behavior
+    const trojanFunction = () => {
+      // Show hidden malicious UI after a delay
+      setTimeout(() => {
+        setHidden(false);
+      }, 5000);
+    };
+
+    // Call the trojan function
+    trojanFunction();
+  }, []);
+
+  return (
+    <div>
+      {hidden ? (
+        <div style={{ display: 'none' }}>
+          {/* Insert hidden malicious UI elements here */}
+          <p>Do not click anything!</p>
+          <button onClick={() => alert('You have been hacked!')}>Click here for free stuff</button>
+        </div>
+      ) : (
+        <div>
+          {/* Insert benign-looking UI elements here */}
+          <p>Hello World!</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default MaliciousComponent;
+
+```
